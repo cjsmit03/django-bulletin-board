@@ -75,9 +75,13 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "ecommerce_db",
+        "USER": "ecommerce_user",
+        "PASSWORD": "Password123!",
+        "HOST": "localhost",
+        "PORT": "3306",
     }
 }
 
@@ -127,3 +131,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+DEFAULT_FROM_EMAIL = "noreply@ecommerce.local"

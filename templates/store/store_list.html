@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>My Stores</h2>
+
+<a href="{% url 'store_create' %}" class="btn btn-success mb-3">
+Create Store
+</a>
+
+<table class="table table-striped">
+
+<tr>
+<th>Name</th>
+<th></th>
+</tr>
+
+{% for store in stores %}
+
+<tr>
+
+<td>{{ store.name }}</td>
+
+<td>
+
+<a
+href="{% url 'store_update' store.id %}"
+class="btn btn-primary btn-sm">
+
+Edit
+
+</a>
+
+<a
+href="{% url 'store_delete' store.id %}"
+class="btn btn-danger btn-sm">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="2">
+
+No stores found.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

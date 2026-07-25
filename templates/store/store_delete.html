@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Delete Store</h2>
+
+<p>
+
+Delete
+
+<strong>
+
+{{ store.name }}
+
+</strong>
+
+?
+
+</p>
+
+<form method="post">
+
+{% csrf_token %}
+
+<button
+class="btn btn-danger">
+
+Delete
+
+</button>
+
+<a
+class="btn btn-secondary"
+href="{% url 'store_list' %}">
+
+Cancel
+
+</a>
+
+</form>
+
+{% endblock %}

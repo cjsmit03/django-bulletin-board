@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Invoice</h2>
+
+<hr>
+
+<p>
+
+<strong>Order Number:</strong>
+
+{{ order.id }}
+
+</p>
+
+<p>
+
+<strong>Date:</strong>
+
+{{ order.created_at }}
+
+</p>
+
+<table class="table">
+
+<tr>
+
+<th>Product</th>
+
+<th>Qty</th>
+
+<th>Price</th>
+
+</tr>
+
+{% for item in order.items.all %}
+
+<tr>
+
+<td>{{ item.product.name }}</td>
+
+<td>{{ item.quantity }}</td>
+
+<td>R{{ item.price }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<h3>
+
+Total: R{{ order.total }}
+
+</h3>
+
+<a
+class="btn btn-primary"
+href="{% url 'home' %}">
+
+Continue Shopping
+
+</a>
+
+{% endblock %}

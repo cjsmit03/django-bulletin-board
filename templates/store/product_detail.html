@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-lg-8 mx-auto">
+
+        <div class="card shadow">
+
+            <div class="card-body">
+
+                <h2 class="card-title">
+                    {{ product.name }}
+                </h2>
+
+                <hr>
+
+                <p>
+                    <strong>Category:</strong>
+                    {{ product.category }}
+                </p>
+
+                <p>
+                    <strong>Description:</strong>
+                </p>
+
+                <p>
+                    {{ product.description }}
+                </p>
+
+                <h4 class="text-success">
+                    R{{ product.price }}
+                </h4>
+
+                <p>
+                    <strong>Stock Available:</strong>
+                    {{ product.stock }}
+                </p>
+
+                <form
+                    action="{% url 'add_to_cart' product.pk %}"
+                    method="post"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="btn btn-success"
+                    >
+                        Add to Cart
+                    </button>
+
+                </form>
+
+                <hr>
+
+                <h3>Reviews</h3>
+
+                {% for review in product.reviews.all %}
+
+                    <div class="card mb-2">
+
+                        <div class="card-body">
+
+                            <strong>
+                                {{ review.buyer.username }}
+                            </strong>
+
+                            {% if review.verified %}
+
+                                <span class="badge bg-success">
+                                    Verified Purchase
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-secondary">
+                                    Unverified
+                                </span>
+
+                            {% endif %}
+
+                            <br>
+
+                            Rating:
+                            {{ review.rating }}/5
+
+                            <p class="mt-2">
+                                {{ review.comment }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% empty %}
+
+                    <p>No reviews yet.</p>
+
+                {% endfor %}
+
+                {% if user.is_authenticated %}
+
+                    <a
+                        href="{% url 'add_review' product.id %}"
+                        class="btn btn-primary"
+                    >
+                        Leave Review
+                    </a>
+
+                {% endif %}
+
+                <br><br>
+
+                <a
+                    href="{% url 'home' %}"
+                    class="btn btn-secondary"
+                >
+                    Back to Products
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
