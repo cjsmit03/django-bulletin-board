@@ -31,13 +31,15 @@ Django eCommerce
 
 <span class="navbar-text text-white me-3">
 
-Welcome {{ user.username }}
+    Welcome {{ user.username }}
 
-{% if user.groups.first %}
-({{ user.groups.first.name }})
-{% endif %}
+    {% if user.groups.first %}
+        ({{ user.groups.first.name }})
+    {% endif %}
 
 </span>
+
+{% if user.groups.all.0.name == "Vendor" %}
 
 <a
 class="btn btn-outline-light btn-sm me-2"
@@ -57,11 +59,25 @@ My Products
 
 <a
 class="btn btn-outline-light btn-sm me-2"
+href="{% url 'category_create' %}">
+
+Create Category
+
+</a>
+
+{% endif %}
+
+{% if user.groups.all.0.name == "Customer" %}
+
+<a
+class="btn btn-outline-light btn-sm me-2"
 href="{% url 'cart' %}">
 
 Cart
 
 </a>
+
+{% endif %}
 
 <a
 class="btn btn-danger btn-sm"

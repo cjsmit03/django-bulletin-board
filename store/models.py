@@ -28,6 +28,9 @@ class Store(models.Model):
     )
 
     def __str__(self):
+        """
+        Return the store name.
+        """
         return self.name
 
 
@@ -42,6 +45,9 @@ class Category(models.Model):
     )
 
     def __str__(self):
+        """
+        Return the category name.
+        """
         return self.name
 
 
@@ -81,8 +87,12 @@ class Product(models.Model):
     )
 
     def __str__(self):
+        """
+        Return the product name.
+        """
         return self.name
-        
+
+
 class Order(models.Model):
     """
     Represents a completed order.
@@ -103,6 +113,9 @@ class Order(models.Model):
     )
 
     def __str__(self):
+        """
+        Return the order identifier.
+        """
         return f"Order #{self.id}"
 
 
@@ -130,8 +143,12 @@ class OrderItem(models.Model):
     )
 
     def __str__(self):
+        """
+        Return the product name.
+        """
         return self.product.name
-        
+
+
 class Review(models.Model):
     """
     Product review left by a buyer.
@@ -161,4 +178,7 @@ class Review(models.Model):
     )
 
     def __str__(self):
+        """
+        Return the product and buyer information.
+        """
         return f"{self.product.name} - {self.buyer.username}"

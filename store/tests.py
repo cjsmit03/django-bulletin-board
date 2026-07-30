@@ -168,3 +168,105 @@ class StoreTests(TestCase):
             Order.objects.count(),
             1,
         )
+
+    def test_customer_cannot_create_store(self):
+        """
+        Ensure customers cannot create stores.
+        """
+
+        customer_group = Group.objects.get(name="Customer")
+        self.customer.groups.add(customer_group)
+
+        self.client.login(
+            username="customer",
+            password="password123",
+        )
+
+        response = self.client.get(
+            reverse("store_create")
+        )
+
+        self.assertEqual(
+            response.status_code,
+            302,
+        )
+
+    def test_customer_cannot_create_product(self):
+        """
+        Ensure customers cannot create products.
+        """
+
+        customer_group = Group.objects.get(name="Customer")
+        self.customer.groups.add(customer_group)
+
+        self.client.login(
+            username="customer",
+            password="password123",
+        )
+
+        response = self.client.get(
+            reverse("product_create")
+        )
+
+        self.assertEqual(
+            response.status_code,
+            302,
+        )
+
+    def test_vendor_can_access_store_creation(self):
+        """
+        Ensure vendors can access the store creation page.
+        """
+
+        vendor_group = Group.objects.get(name="Vendor")
+        self.vendor.groups.add(vendor_group)
+
+        self.client.login(
+            username="vendor",
+            password="password123",
+        )
+
+        response = self.client.get(
+            reverse("store_create")
+        )
+
+        self.assertEqual(
+            response.status_code,
+            200,
+        )
+
+    def test_vendor_can_access_product_creation(self):
+        """
+        Ensure vendors can access the product creation page.
+        """
+
+        vendor_group = Group.objects.get(name="Vendor")
+        self.vendor.groups.add(vendor_group)
+
+        self.client.login(
+            username="vendor",
+            password="password123",
+        )
+
+        response = self.client.get(
+            reverse("product_create")
+        )
+
+        self.assertEqual(
+            response.status_code,
+            200,
+        )
+
+    def test_category_creation(self):
+        """
+        Ensure categories can be created successfully.
+        """
+
+        category = Category.objects.create(
+            name="Computers",
+        )
+
+        self.assertEqual(
+            category.name,
+            "Computers",
+        )

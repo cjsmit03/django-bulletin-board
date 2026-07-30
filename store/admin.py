@@ -9,8 +9,13 @@ from .models import (
     Store,
 )
 
+
 @admin.register(Store)
 class StoreAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for stores.
+    """
+
     list_display = (
         "name",
         "owner",
@@ -20,6 +25,10 @@ class StoreAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for categories.
+    """
+
     list_display = (
         "name",
     )
@@ -27,6 +36,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for products.
+    """
+
     list_display = (
         "name",
         "store",
@@ -39,9 +52,13 @@ class ProductAdmin(admin.ModelAdmin):
         "store",
         "category",
     )
-    
+
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for orders.
+    """
 
     list_display = (
         "id",
@@ -53,15 +70,22 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for order items.
+    """
 
     list_display = (
         "order",
         "product",
         "quantity",
     )
-    
+
+
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for reviews.
+    """
 
     list_display = (
         "product",

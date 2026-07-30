@@ -22,12 +22,36 @@ class RegisterForm(UserCreationForm):
         widget=forms.RadioSelect,
     )
 
+    email = forms.EmailField(
+        required=True,
+        help_text="Required. Enter a valid email address.",
+    )
+
     class Meta:
+        """
+        Registration form configuration.
+        """
+
         model = User
 
         fields = (
             "username",
+            "email",
             "role",
             "password1",
             "password2",
         )
+
+    def clean_email(self):
+        """
+        Ensure the email address is unique.
+        """
+
+        email = self.cleaned_data["email"]
+
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(
+                "This email address is already registered."
+            )
+
+        return email

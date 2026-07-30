@@ -2,78 +2,74 @@
 
 ## Overview
 
-This project is a simple eCommerce web application developed using Django as part of the HyperionDev Introduction to Software Engineering course.
+This project is a Django-based eCommerce web application developed as part of the HyperionDev Introduction to Software Engineering course.
 
-The application allows users to register as either Vendors or Customers. Vendors can manage stores and products, while Customers can browse products, add them to a shopping cart, complete checkout, and leave product reviews.
+The application allows vendors to create and manage online stores, upload products for sale, and allows customers to browse products, add items to a shopping cart, place orders, and leave reviews for purchased products.
+
+The project also includes:
+
+- User authentication and authorization
+- Customer and Vendor roles
+- Store and product management
+- Shopping cart and checkout
+- Order history
+- Product reviews
+- REST API endpoints using Django REST Framework
+- Reddit API integration using the requests library
 
 ---
 
 ## Features
 
-### User Management
+### Customer
 
-- User registration
-- User login/logout
-- Vendor and Customer roles
-- Password reset
-
-### Vendor Features
-
-- Create stores
-- View stores
-- Edit stores
-- Delete stores
-- Create products
-- View products
-- Edit products
-- Delete products
-
-### Customer Features
-
-- Browse products
-- View product details
+- Register and log in
+- Browse stores and products
 - Add products to cart
-- Session-based shopping cart
-- Checkout
-- Invoice generation
-- Product reviews
-- Verified and unverified reviews
+- Checkout orders
+- View invoices
+- Leave product reviews
 
-### Other Features
+### Vendor
 
-- Django authentication
-- Django Groups and Permissions
-- Bootstrap 5 interface
-- Django Admin
-- Unit tests
+- Register and log in
+- Create stores
+- Manage products
+- View customer reviews
+
+### Administrator
+
+- Manage users
+- Create product categories
+- Manage the application through the Django Admin interface
 
 ---
 
-## Technologies Used
+## Requirements
 
-- Python 3
-- Django 6
-- Bootstrap 5
-- SQLite (development database)
+- Python 3.14+
+- MySQL Server
+- pip
+- Virtual Environment
 
 ---
 
 ## Installation
 
-Clone the repository.
+Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone <YOUR_GITHUB_REPOSITORY_URL>
 cd ecommerce_project
 ```
 
-Create a virtual environment.
+Create a virtual environment:
 
 ```bash
 python3 -m venv venv
 ```
 
-Activate the virtual environment.
+Activate it:
 
 Linux/macOS
 
@@ -83,32 +79,54 @@ source venv/bin/activate
 
 Windows
 
-```bash
+```cmd
 venv\Scripts\activate
 ```
 
-Install the required packages.
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run database migrations.
+---
 
-```bash
-python3 manage.py migrate
+## Database Setup
+
+Create a Maria/MySQL database.
+
+Example:
+
+```sql
+CREATE DATABASE ecommerce_db;
 ```
 
-Create an administrator account.
+Update the database credentials inside:
 
-```bash
-python3 manage.py createsuperuser
+```
+ecommerce/settings.py
 ```
 
-Run the development server.
+Run the migrations:
 
 ```bash
-python3 manage.py runserver
+python manage.py migrate
+```
+
+Create an administrator:
+
+```bash
+python manage.py createsuperuser
+```
+
+---
+
+## Running the application
+
+Start the server:
+
+```bash
+python manage.py runserver
 ```
 
 Open:
@@ -117,45 +135,67 @@ Open:
 http://127.0.0.1:8000/
 ```
 
----
+Admin:
 
-## Running Tests
-
-Run all unit tests.
-
-```bash
-python3 manage.py test
+```
+http://127.0.0.1:8000/admin/
 ```
 
 ---
 
-## Project Structure
+## Initial Setup
+
+Before vendors can create products, an administrator must first create one or more product categories.
+
+Steps:
+
+1. Log in to the Django Admin.
+2. Open **Categories**.
+3. Create one or more categories (e.g. Electronics, Books, Clothing).
+4. Vendors can now create products.
+
+---
+
+## Typical Workflow
+
+1. Register a Vendor account.
+2. Log in.
+3. Create a Store.
+4. Create Products.
+5. Register a Customer account.
+6. Browse products.
+7. Add products to cart.
+8. Checkout.
+9. Leave reviews for purchased products.
+
+---
+
+## REST API
+
+Available endpoints:
 
 ```
-ecommerce_project/
+GET    /api/vendors/<vendor_id>/stores/
+GET    /api/stores/<store_id>/products/
+GET    /api/products/<product_id>/reviews/
 
-accounts/
-store/
-ecommerce/
-templates/
-static/
-Planning/
-
-manage.py
-requirements.txt
-README.md
+POST   /api/stores/create/
+POST   /api/products/create/
 ```
 
 ---
 
-## Planning
+## Reddit Integration
 
-The Planning folder contains:
+Visit:
 
-- requirements.md
-- ui_design.md
-- security.md
-- failure_recovery.md
+```
+/reddit/
+```
+
+The application retrieves posts from the **r/django** subreddit using the Reddit API.
+
+> **Note:** Reddit may return HTTP 403 for anonymous requests depending on Reddit's current API restrictions and network policies.
 
 ---
 
@@ -163,4 +203,6 @@ The Planning folder contains:
 
 CJ Smit
 
-HyperionDev – Introduction to Software Engineering
+Introduction to Software Engineering
+
+HyperionDev

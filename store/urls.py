@@ -22,9 +22,39 @@ urlpatterns = [
     ),
 
     path(
+        "reddit/",
+        views.reddit_feed,
+        name="reddit_feed",
+    ),
+
+    path(
+        "api/products/create/",
+        views.api_create_product,
+        name="api_create_product",
+    ),
+
+    path(
         "cart/add/<int:pk>/",
         views.add_to_cart,
         name="add_to_cart",
+    ),
+
+    path(
+        "api/stores/<int:store_id>/products/",
+        views.api_store_products,
+        name="api_store_products",
+    ),
+   
+    path(
+        "api/products/<int:product_id>/reviews/",
+        views.api_product_reviews,
+        name="api_product_reviews",
+    ),
+
+    path(
+        "api/stores/create/",
+        views.api_create_store,
+        name="api_create_store",
     ),
 
     path(
@@ -37,6 +67,12 @@ urlpatterns = [
         "stores/",
         views.store_list,
         name="store_list",
+    ),
+
+    path(
+        "api/vendors/<int:vendor_id>/stores/",
+        views.api_vendor_stores,
+        name="api_vendor_stores",
     ),
 
     path(
@@ -82,6 +118,11 @@ urlpatterns = [
         "checkout/",
         views.checkout,
         name="checkout",
+    ),
+        path(
+        "categories/create/",
+        views.category_create,
+        name="category_create",
     ),
     path(
         "product/<int:pk>/review/",
